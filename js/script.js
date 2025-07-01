@@ -1,5 +1,6 @@
 const localStorageKey = "to-do-list";
 const inputNewTask = document.getElementById("input-new-task");
+const btnNewTask = document.getElementById("btn-new-task");
 const todoListElement = document.getElementById("to-do-list");
 
 function getTasksFromLocalStorage() {
@@ -22,6 +23,7 @@ function taskExists(taskName) {
     (task) => task.name.toLowerCase() === taskName.toLowerCase()
   );
 }
+
 function addNewTask() {
   inputNewTask.style.border = "";
   const newTaskName = inputNewTask.value.trim();
@@ -43,6 +45,7 @@ function addNewTask() {
   inputNewTask.value = "";
   renderTasks();
 }
+
 function renderTasks() {
   const tasks = getTasksFromLocalStorage();
   todoListElement.innerHTML = "";
@@ -81,6 +84,7 @@ function removeTask(taskNameToRemove) {
   renderTasks();
 }
 
+btnNewTask.addEventListener("click", addNewTask);
 todoListElement.addEventListener("click", (event) => {
   const target = event.target.closest(".remove-btn");
   if (target) {
@@ -90,4 +94,5 @@ todoListElement.addEventListener("click", (event) => {
     }
   }
 });
+
 document.addEventListener("DOMContentLoaded", renderTasks);
